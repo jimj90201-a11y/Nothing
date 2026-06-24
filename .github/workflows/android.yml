@@ -22,8 +22,10 @@ jobs:
         run: |
           wget https://services.gradle.org/distributions/gradle-8.4-bin.zip
           unzip gradle-8.4-bin.zip
-          export PATH=$PWD/gradle-8.4/bin:$PATH
-          gradle -v
+          echo "$PWD/gradle-8.4/bin" >> $GITHUB_PATH
+
+      - name: Verify Gradle version
+        run: gradle -v
 
       - name: Build APK
         run: gradle assembleDebug
