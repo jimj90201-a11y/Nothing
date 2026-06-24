@@ -18,12 +18,15 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Gradle
+      - name: Install Gradle 8.4
         run: |
-          gradle wrapper
+          wget https://services.gradle.org/distributions/gradle-8.4-bin.zip
+          unzip gradle-8.4-bin.zip
+          export PATH=$PWD/gradle-8.4/bin:$PATH
+          gradle -v
 
       - name: Build APK
-        run: ./gradlew assembleDebug
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
